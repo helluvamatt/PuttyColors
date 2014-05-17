@@ -1,0 +1,4 @@
+PuttyColors
+===========
+
+PuTTY Colors
