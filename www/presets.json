@@ -1,0 +1,92 @@
+[
+	{
+		"type": "PRESET",
+		"name": "Default",
+		"author": "Simon Tatham",
+		"url": "http://www.chiark.greenend.org.uk/~sgtatham/putty/",
+		"data": {
+			"colour0": "rgb(184,184,184)",
+			"colour1": "rgb(255,255,255)",
+			"colour2": "rgb(0,0,0)",
+			"colour3": "rgb(0,0,0)",
+			"colour4": "rgb(0,0,0)",
+			"colour5": "rgb(0,255,0)",
+			"colour6": "rgb(0,0,0)",
+			"colour7": "rgb(63,63,63)",
+			"colour8": "rgb(184,0,0)",
+			"colour9": "rgb(255,0,0)",
+			"colour10": "rgb(0,184,0)",
+			"colour11": "rgb(0,255,0)",
+			"colour12": "rgb(184,184,0)",
+			"colour13": "rgb(255,255,0)",
+			"colour14": "rgb(0,0,184)",
+			"colour15": "rgb(0,0,255)",
+			"colour16": "rgb(184,0,184)",
+			"colour17": "rgb(255,0,255)",
+			"colour18": "rgb(0,184,184)",
+			"colour19": "rgb(0,255,255)",
+			"colour20": "rgb(184,184,184)",
+			"colour21": "rgb(255,255,255)"
+		}
+	}, {
+		"type": "DIVIDER"
+	}, {
+		"type": "PRESET",
+		"name": "Solarized Dark",
+		"author": "Ethan Schoonover",
+		"url": "https://github.com/altercation/solarized/tree/master/putty-colors-solarized",
+		"data": {
+			"colour0": "rgb(131,148,150)",
+			"colour1": "rgb(147,161,161)",
+			"colour2": "rgb(0,43,54)",
+			"colour3": "rgb(7,54,66)",
+			"colour4": "rgb(0,43,54)",
+			"colour5": "rgb(238,232,213)",
+			"colour6": "rgb(7,54,66)",
+			"colour7": "rgb(0,43,56)",
+			"colour8": "rgb(220,50,47)",
+			"colour9": "rgb(203,75,22)",
+			"colour10": "rgb(133,153,0)",
+			"colour11": "rgb(88,110,117)",
+			"colour12": "rgb(181,137,0)",
+			"colour13": "rgb(101,123,131)",
+			"colour14": "rgb(38,139,210)",
+			"colour15": "rgb(131,148,150)",
+			"colour16": "rgb(211,54,130)",
+			"colour17": "rgb(108,113,196)",
+			"colour18": "rgb(42,161,152)",
+			"colour19": "rgb(147,161,161)",
+			"colour20": "rgb(238,232,213)",
+			"colour21": "rgb(253,246,227)"
+		}
+	}, {
+		"type": "PRESET",
+		"name": "Solarized Light",
+		"author": "Ethan Schoonover",
+		"url": "https://github.com/altercation/solarized/tree/master/putty-colors-solarized",
+		"data": {
+			"colour0": "rgb(101,123,131)",
+			"colour1": "rgb(88,110,117)",
+			"colour2": "rgb(253,246,227)",
+			"colour3": "rgb(238,232,213)",
+			"colour4": "rgb(238,232,213)",
+			"colour5": "rgb(101,123,131)",
+			"colour6": "rgb(7,54,66)",
+			"colour7": "rgb(0,43,54)",
+			"colour8": "rgb(220,50,47)",
+			"colour9": "rgb(203,75,22)",
+			"colour10": "rgb(133,153,0)",
+			"colour11": "rgb(88,110,117)",
+			"colour12": "rgb(181,137,0)",
+			"colour13": "rgb(101,123,131)",
+			"colour14": "rgb(38,139,210)",
+			"colour15": "rgb(131,148,150)",
+			"colour16": "rgb(211,54,130)",
+			"colour17": "rgb(108,113,196)",
+			"colour18": "rgb(42,161,152)",
+			"colour19": "rgb(147,161,161)",
+			"colour20": "rgb(238,232,213)",
+			"colour21": "rgb(253,246,227)"
+		}
+	}
+]
