@@ -31,6 +31,31 @@ var color_setting_names = {
 	'colour21': "ANSI White Bold",
 };
 
+var default_colors = {
+	"colour0": "rgb(184,184,184)",
+	"colour1": "rgb(255,255,255)",
+	"colour2": "rgb(0,0,0)",
+	"colour3": "rgb(0,0,0)",
+	"colour4": "rgb(0,0,0)",
+	"colour5": "rgb(0,255,0)",
+	"colour6": "rgb(0,0,0)",
+	"colour7": "rgb(63,63,63)",
+	"colour8": "rgb(184,0,0)",
+	"colour9": "rgb(255,0,0)",
+	"colour10": "rgb(0,184,0)",
+	"colour11": "rgb(0,255,0)",
+	"colour12": "rgb(184,184,0)",
+	"colour13": "rgb(255,255,0)",
+	"colour14": "rgb(0,0,184)",
+	"colour15": "rgb(0,0,255)",
+	"colour16": "rgb(184,0,184)",
+	"colour17": "rgb(255,0,255)",
+	"colour18": "rgb(0,184,184)",
+	"colour19": "rgb(0,255,255)",
+	"colour20": "rgb(184,184,184)",
+	"colour21": "rgb(255,255,255)"
+};
+
 // Current colors
 var current_colors = {};
 
@@ -285,7 +310,7 @@ $(document).ready(function()
 		current_colors = $.extend({}, current_colors, imported);
 		preview();
 		updateCodeBlocks();
-		
+
 		// update pickers for currently selected colour
 		changeSelection.call($colour_selector[0]);
 
@@ -293,150 +318,59 @@ $(document).ready(function()
 		$import_modal.modal('hide');
 	});
 
-	// load the presets
-	var $preset_menu = $('#preset_menu');
-	var $preset_credits = $('#preset_credits');
-	$preset_menu.on('click', '.preset-entry', function()
+	// presets
+	var $modal_preset = $('#modal_presets');
+	var $preset_list = $('#modal_presets #preset_list');
+	var applyPreset = function(presetData)
 	{
-		var $this = $(this);
-		
-		var preset_name = $this.text();
-		$field_preset_name.val(preset_name);
-		changeTitle.call($field_preset_name[0]);
-		
-		var preset_data = JSON.parse(decodeURIComponent($this.data('preset')));
-		current_colors = $.extend({}, current_colors, preset_data);
+		current_colors = $.extend({}, current_colors, presetData);
 		preview();
 		updateCodeBlocks();
 		changeSelection.call($colour_selector[0]);
-	});
-
+	};
 	var processPresetResponse = function(data)
 	{
+		$preset_list.html('');
 		for ( var i in data)
 		{
 			var preset = data[i];
-			if (preset.type == 'PRESET')
-			{
-				if (preset.name == 'Default')
-				{
-					// initial update
-					current_colors = preset.data;
-					preview();
-					updateCodeBlocks();
-					changeSelection.call($colour_selector[0]);
-				}
-				$('<li><a href="Javascript:;" class="preset-entry" data-preset="' + encodeURIComponent(JSON.stringify(preset.data)) + '">' + preset.name + '</a></li>').appendTo($preset_menu);
-				$('<li><a href="' + preset.url + '">' + preset.name + '</a> - <em>' + preset.author + '</em>').appendTo($preset_credits);
-			}
-			else if (preset.type == 'DIVIDER')
-			{
-				$('<li class="divider"></li>').appendTo($preset_menu);
-			}
+			$('<li class="list-group-item preset-entry" data-preset="' + encodeURIComponent(JSON.stringify(preset.data)) + '"><a href="#" class="badge load-action"><span class="glyphicon glyphicon-floppy-open"></span></a><h4 class="list-group-item-heading">' + preset.name + '</h4><p class="list-group-item-text">' + preset.author + '</p><p class="list-group-item-text"><a href="' + preset.url + '">' + preset.url + '</a></p></li>').appendTo($preset_list);
 		}
 	};
+	var loaderTimeout = undefined;
+	var ajaxBeforeSend = function()
+	{
+		loaderTimeout = setTimeout(function()
+		{
+			$('#modal_preset_loader').show();
+		}, 200);
+	};
+	var ajaxComplete = function()
+	{
+		if (typeof loaderTimeout !== 'undefined')
+			clearTimeout(loaderTimeout);
+		$('#modal_preset_loader').hide();
 
-	// for when are on a real webserver:
-	/*
-	$.ajax({
-		dataType: "json",
-		url: "presets.json",
-		success: processPresetResponse
+	};
+	$preset_list.on('click', '.preset-entry .load-action', function()
+	{
+		var presetData = JSON.parse(decodeURIComponent($(this).parent().data('preset')));
+		applyPreset(presetData);
+		$modal_preset.modal('hide');
 	});
-	*/
-	// for now:
-	var presetData = [
-			{
-				"type": "PRESET",
-				"name": "Default",
-				"author": "Simon Tatham",
-				"url": "http://www.chiark.greenend.org.uk/~sgtatham/putty/",
-				"data": {
-					"colour0": "rgb(184,184,184)",
-					"colour1": "rgb(255,255,255)",
-					"colour2": "rgb(0,0,0)",
-					"colour3": "rgb(0,0,0)",
-					"colour4": "rgb(0,0,0)",
-					"colour5": "rgb(0,255,0)",
-					"colour6": "rgb(0,0,0)",
-					"colour7": "rgb(63,63,63)",
-					"colour8": "rgb(184,0,0)",
-					"colour9": "rgb(255,0,0)",
-					"colour10": "rgb(0,184,0)",
-					"colour11": "rgb(0,255,0)",
-					"colour12": "rgb(184,184,0)",
-					"colour13": "rgb(255,255,0)",
-					"colour14": "rgb(0,0,184)",
-					"colour15": "rgb(0,0,255)",
-					"colour16": "rgb(184,0,184)",
-					"colour17": "rgb(255,0,255)",
-					"colour18": "rgb(0,184,184)",
-					"colour19": "rgb(0,255,255)",
-					"colour20": "rgb(184,184,184)",
-					"colour21": "rgb(255,255,255)"
-				}
-			}, {
-				"type": "DIVIDER"
-			}, {
-				"type": "PRESET",
-				"name": "Solarized Dark",
-				"author": "Ethan Schoonover",
-				"url": "https://github.com/altercation/solarized/tree/master/putty-colors-solarized",
-				"data": {
-					"colour0": "rgb(131,148,150)",
-					"colour1": "rgb(147,161,161)",
-					"colour2": "rgb(0,43,54)",
-					"colour3": "rgb(7,54,66)",
-					"colour4": "rgb(0,43,54)",
-					"colour5": "rgb(238,232,213)",
-					"colour6": "rgb(7,54,66)",
-					"colour7": "rgb(0,43,56)",
-					"colour8": "rgb(220,50,47)",
-					"colour9": "rgb(203,75,22)",
-					"colour10": "rgb(133,153,0)",
-					"colour11": "rgb(88,110,117)",
-					"colour12": "rgb(181,137,0)",
-					"colour13": "rgb(101,123,131)",
-					"colour14": "rgb(38,139,210)",
-					"colour15": "rgb(131,148,150)",
-					"colour16": "rgb(211,54,130)",
-					"colour17": "rgb(108,113,196)",
-					"colour18": "rgb(42,161,152)",
-					"colour19": "rgb(147,161,161)",
-					"colour20": "rgb(238,232,213)",
-					"colour21": "rgb(253,246,227)"
-				}
-			}, {
-				"type": "PRESET",
-				"name": "Solarized Light",
-				"author": "Ethan Schoonover",
-				"url": "https://github.com/altercation/solarized/tree/master/putty-colors-solarized",
-				"data": {
-					"colour0": "rgb(101,123,131)",
-					"colour1": "rgb(88,110,117)",
-					"colour2": "rgb(253,246,227)",
-					"colour3": "rgb(238,232,213)",
-					"colour4": "rgb(238,232,213)",
-					"colour5": "rgb(101,123,131)",
-					"colour6": "rgb(7,54,66)",
-					"colour7": "rgb(0,43,54)",
-					"colour8": "rgb(220,50,47)",
-					"colour9": "rgb(203,75,22)",
-					"colour10": "rgb(133,153,0)",
-					"colour11": "rgb(88,110,117)",
-					"colour12": "rgb(181,137,0)",
-					"colour13": "rgb(101,123,131)",
-					"colour14": "rgb(38,139,210)",
-					"colour15": "rgb(131,148,150)",
-					"colour16": "rgb(211,54,130)",
-					"colour17": "rgb(108,113,196)",
-					"colour18": "rgb(42,161,152)",
-					"colour19": "rgb(147,161,161)",
-					"colour20": "rgb(238,232,213)",
-					"colour21": "rgb(253,246,227)"
-				}
-			}
-	];
-	processPresetResponse(presetData);
+	$modal_preset.on('show.bs.modal', function()
+	{
+		$preset_list.html('');
+		$.ajax({
+			beforeSend: ajaxBeforeSend,
+			complete: ajaxComplete,
+			dataType: "json",
+			url: "presets.php",
+			success: processPresetResponse
+		});
+	});
+
+	// initial update
+	applyPreset(default_colors);
 
 });

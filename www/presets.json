@@ -29,8 +29,6 @@
 			"colour21": "rgb(255,255,255)"
 		}
 	}, {
-		"type": "DIVIDER"
-	}, {
 		"type": "PRESET",
 		"name": "Solarized Dark",
 		"author": "Ethan Schoonover",
