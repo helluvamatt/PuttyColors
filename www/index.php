@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/putty.css" />
 <style id="preview_style"></style>
 </head>
-<body>
+<body data-url="<?php echo "/"; /* FIXME Hard coded to base application path, change to use framework */ ?>">
 	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -26,9 +26,8 @@
 					<li><a href="#" data-toggle="modal" data-target="#modal_presets"><span class="glyphicon glyphicon-star"></span>&nbsp;Load Preset</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#modal_import"><span class="glyphicon glyphicon-floppy-open"></span>&nbsp;Import</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#modal_export"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;Export</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_share"><span class="glyphicon glyphicon-share"></span>&nbsp;Share</a></li>
+					<li><a href="#" id="share_action"><span class="glyphicon glyphicon-share"></span>&nbsp;Share</a></li>
 				</ul>
-
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
@@ -184,6 +183,36 @@
 				</div>
 				<div class="modal-footer">
 					<div id="modal_preset_loader" style="float: left; display: none; text-align: center;"><img src="img/loading.gif" alt="loading" style="vertical-align: middle;" />&nbsp;Loading...</div>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modal_loader" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div style="text-align: center;"><img src="img/loading.gif" alt="loading" style="vertical-align: middle;" />&nbsp;Loading...</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modal_share" tabindex="-1" role="dialog" aria-labelledby="modal_share_title" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="modal_share_title">Share</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="share_field">Share this link:</label>
+						<input type="text" name="shareField" id="share_field" class="form-control">
+					</div>
+				</div>
+				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>

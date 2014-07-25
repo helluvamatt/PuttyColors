@@ -64,6 +64,11 @@ var colors = [
 		"default", "black  ", "red    ", "green  ", "yellow ", "blue   ", "magenta", "cyan   ", "white  "
 ];
 
+var urlFor = function(path)
+{
+	return $('body').data('url') + path;
+};
+
 var preview = function()
 {
 	// Update stylesheet
@@ -367,6 +372,46 @@ $(document).ready(function()
 			dataType: "json",
 			url: "presets.php",
 			success: processPresetResponse
+		});
+	});
+	
+	// share current settings
+	var $share_action = $('a#share_action');
+	var $modal_share = $('#modal_share');
+	var $share_field = $('#share_field');
+	var shareLoaderTimeout = undefined;
+	var showShareDialog = function(data)
+	{
+		$share_field.val(data.shareUrl);
+		$modal_share.modal('show');
+	};
+	var shareAjaxBeforeSend = function()
+	{
+		shareLoaderTimeout = setTimeout(function()
+		{
+			$('#mshare_loader').show();
+		}, 200);
+	};
+	var shareAjaxComplete = function()
+	{
+		if (typeof shareLoaderTimeout !== 'undefined')
+			clearTimeout(shareLoaderTimeout);
+		$('#modal_share_loader').hide();
+	};
+	$share_action.on('click', function() {
+		
+		var session_name = $field_preset_name.val();
+		if (session_name == '')
+			session_name = "Default Session";
+		
+		$.ajax({
+			beforeSend: shareAjaxBeforeSend,
+			complete: shareAjaxComplete,
+			dataType: "json",
+			type: 'POST',
+			data: {'colors': JSON.stringify(current_colors), 'session_name': session_name},
+			url: urlFor('share.php'), // TODO Framework: Use URL: /api/share
+			success: showShareDialog 
 		});
 	});
 
