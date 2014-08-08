@@ -35,5 +35,5 @@ composer.phar
 
 # Application specific
 /data/
-/app/logs/
+/app/logs/*.log
 /app/config.json
