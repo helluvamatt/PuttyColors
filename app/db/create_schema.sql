@@ -1,4 +1,5 @@
-﻿DROP TABLE IF EXISTS sessions;
+﻿DROP TABLE IF EXISTS putty_profiles;
+DROP TABLE IF EXISTS sessions;
 
 -- CodeIgniter Session table
 CREATE TABLE sessions (
@@ -33,3 +34,12 @@ BEGIN
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE TABLE putty_profiles (
+	id BIGSERIAL PRIMARY KEY,
+	session_name CHARACTER VARYING(255) NOT NULL DEFAULT 'Default Session',
+	color_data TEXT NOT NULL,
+	created_at TIMESTAMP NOT null DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NOT null DEFAULT CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP DEFAULT null
+);

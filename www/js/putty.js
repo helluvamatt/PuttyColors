@@ -187,18 +187,39 @@ var parseRegistryEntries = function(regData)
 	return colors;
 };
 
+var messageBox = function(primaryMessage, secondaryMessage, level)
+{
+	var $messageBox = $('#modal_message');
+	var messageHtml = '';
+	if (typeof secondaryMessage !== 'undefined')
+	{
+		messageHtml = '<p><strong>' + primaryMessage + '</strong></p><p>' + secondaryMessage + '</p>';
+	}
+	else
+	{
+		messageHtml = primaryMessage;
+	}
+	if (typeof level === 'undefined') level = 'danger';
+	$messageBox.find('.modal-body').html('<div class="alert alert-' + level + '" role="alert">' + messageHtml + '</div>');
+	$messageBox.modal('show');
+};
+
 $(document).ready(function()
 {
 
 	// Change title of window when Session Name changes
 	var $field_preset_name = $("#field_preset_name");
-	var changeTitle = function()
+	var setTitle = function(session_name)
 	{
-		var session_name = $(this).val();
 		if (session_name == '')
 			session_name = "Default Session";
 		$('#preview_title').text("PuTTY - " + session_name);
 		updateCodeBlocks();
+	};
+	var changeTitle = function()
+	{
+		var session_name = $(this).val();
+		setTitle(session_name);
 	};
 	$field_preset_name.on('change', changeTitle);
 	$field_preset_name.on('keyup', changeTitle);
@@ -382,21 +403,32 @@ $(document).ready(function()
 	var shareLoaderTimeout = undefined;
 	var showShareDialog = function(data)
 	{
-		$share_field.val(data.shareUrl);
-		$modal_share.modal('show');
+		if (data.result == 0)
+		{
+			$share_field.val(data.shareUrl);
+			$modal_share.modal('show');
+		}
+		else
+		{
+			messageBox('Failed to share profile:', data.error);
+		}
+	};
+	var shareAjaxError = function( jqXHR, textStatus, errorThrown )
+	{
+		messageBox('Failed to share profile:', textStatus + ': ' + errorThrown);
 	};
 	var shareAjaxBeforeSend = function()
 	{
 		shareLoaderTimeout = setTimeout(function()
 		{
-			$('#mshare_loader').show();
+			$('#modal_loader').modal('show');
 		}, 200);
 	};
 	var shareAjaxComplete = function()
 	{
 		if (typeof shareLoaderTimeout !== 'undefined')
 			clearTimeout(shareLoaderTimeout);
-		$('#modal_share_loader').hide();
+		$('#modal_loader').modal('hide');
 	};
 	$share_action.on('click', function() {
 		
@@ -411,11 +443,56 @@ $(document).ready(function()
 			type: 'POST',
 			data: {'colors': JSON.stringify(current_colors), 'session_name': session_name},
 			url: urlFor('/api/share'),
+			error: shareAjaxError,
 			success: showShareDialog 
 		});
 	});
+	
+	var handleShareGet = function(data)
+	{
+		if (data.result == 0)
+		{
+			setTitle(data.session_name);
+			applyPreset(data.color_data);
+		}
+		else
+		{
+			messageBox('Failed to get shared profile:', data.error);
+		}
+	};
+	
+	var currentHash = '';
+	var checkHashAndApply = function()
+	{
+		var h = window.location.hash.substring(1);
+		if (currentHash == h) return;
+		currentHash = h;
+		if (/^\d{8}$/.test(h))
+		{
+			$.ajax({
+				beforeSend: shareAjaxBeforeSend,
+				complete: shareAjaxComplete,
+				dataType: "json",
+				type: 'GET',
+				url: urlFor('/api/share/' + h),
+				error: shareAjaxError,
+				success: handleShareGet
+			});
+		}
+	};
+	
+	$(window).on('hashchange', function() {
+		checkHashAndApply();
+	});
 
 	// initial update
-	applyPreset(default_colors);
+	if (window.location.hash != '')
+	{
+		checkHashAndApply();
+	}
+	else
+	{
+		applyPreset(default_colors);
+	}
 
 });
