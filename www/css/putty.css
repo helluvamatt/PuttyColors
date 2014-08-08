@@ -91,6 +91,11 @@ div.putty-preview .content p {
 	line-height: 1em;
 }
 
+.center
+{
+	text-align: center;
+}
+
 footer {
 	position: absolute;
 	bottom: 0;

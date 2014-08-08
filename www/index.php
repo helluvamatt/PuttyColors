@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link rel="stylesheet" href="css/spectrum.css" />
 <link rel="stylesheet" href="css/putty.css" />
+<link rel="icon" type="image/png" href="img/putty-16.png" />
 <style id="preview_style"></style>
 </head>
 <body data-url="<?php echo "/"; /* FIXME Hard coded to base application path, change to use framework */ ?>">
@@ -163,6 +164,8 @@
 						<li><a href="https://github.com/douglascrockford/JSON-js">JSON-js</a>
 					</ul>
 					<p>Although we love and use PuTTY on a daily basis, we are not affiliated with or endorsed by Simon Tatham or the PuTTY team.</p>
+					<p class="center"><img src="img/putty-32.png" alt="icon" title="PuTTY Logo"></p>
+					<p>The PuTTY icons are licensed under the Expat/MIT License. [<a href="http://svn.tartarus.org/sgt/putty/icons/mkicon.py?view=markup">Source</a>]</p> 
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
