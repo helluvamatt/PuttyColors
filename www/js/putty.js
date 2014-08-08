@@ -370,7 +370,7 @@ $(document).ready(function()
 			beforeSend: ajaxBeforeSend,
 			complete: ajaxComplete,
 			dataType: "json",
-			url: "presets.php",
+			url: urlFor("/api/presets"),
 			success: processPresetResponse
 		});
 	});
@@ -410,7 +410,7 @@ $(document).ready(function()
 			dataType: "json",
 			type: 'POST',
 			data: {'colors': JSON.stringify(current_colors), 'session_name': session_name},
-			url: urlFor('share.php'), // TODO Framework: Use URL: /api/share
+			url: urlFor('/api/share'),
 			success: showShareDialog 
 		});
 	});
