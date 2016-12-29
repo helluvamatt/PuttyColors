@@ -88,7 +88,6 @@
     <Content Include="assets\img\putty-32.png" />
     <Content Include="assets\img\putty.ico" />
     <Content Include="assets\img\PuttyColors.png" />
-    <Content Include="assets\img\screenshot.png" />
     <Content Include="assets\js\alerts.js" />
     <Content Include="assets\js\editor.js" />
     <Content Include="assets\js\export.js" />
