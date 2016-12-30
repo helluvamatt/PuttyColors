@@ -56,35 +56,38 @@ var ProfileColorNames = [
 	"ANSI White Bold",
 ];
 
-function Profile(obj) {}
+function Profile() {
+	this.data = {
+		colour0: "rgb(184,184,184)",
+		colour1: "rgb(255,255,255)",
+		colour2: "rgb(0,0,0)",
+		colour3: "rgb(0,0,0)",
+		colour4: "rgb(0,0,0)",
+		colour5: "rgb(0,255,0)",
+		colour6: "rgb(0,0,0)",
+		colour7: "rgb(63,63,63)",
+		colour8: "rgb(184,0,0)",
+		colour9: "rgb(255,0,0)",
+		colour10: "rgb(0,184,0)",
+		colour11: "rgb(0,255,0)",
+		colour12: "rgb(184,184,0)",
+		colour13: "rgb(255,255,0)",
+		colour14: "rgb(0,0,184)",
+		colour15: "rgb(0,0,255)",
+		colour16: "rgb(184,0,184)",
+		colour17: "rgb(255,0,255)",
+		colour18: "rgb(0,184,184)",
+		colour19: "rgb(0,255,255)",
+		colour20: "rgb(184,184,184)",
+		colour21: "rgb(255,255,255)",
+	};
+}
 Profile.prototype.name = "Default";
 Profile.prototype.sessionName = "Default Session";
 Profile.prototype.author = "Simon Tatham";
 Profile.prototype.url = "http://www.chiark.greenend.org.uk/~sgtatham/putty/";
 Profile.prototype.type = ProfileType.User;
 Profile.prototype.data = {};
-Profile.prototype.data.colour0 ="rgb(184,184,184)";
-Profile.prototype.data.colour1 = "rgb(255,255,255)";
-Profile.prototype.data.colour2 = "rgb(0,0,0)";
-Profile.prototype.data.colour3 = "rgb(0,0,0)";
-Profile.prototype.data.colour4 = "rgb(0,0,0)";
-Profile.prototype.data.colour5 = "rgb(0,255,0)";
-Profile.prototype.data.colour6 = "rgb(0,0,0)";
-Profile.prototype.data.colour7 = "rgb(63,63,63)";
-Profile.prototype.data.colour8 = "rgb(184,0,0)";
-Profile.prototype.data.colour9 = "rgb(255,0,0)";
-Profile.prototype.data.colour10 = "rgb(0,184,0)";
-Profile.prototype.data.colour11 = "rgb(0,255,0)";
-Profile.prototype.data.colour12 = "rgb(184,184,0)";
-Profile.prototype.data.colour13 = "rgb(255,255,0)";
-Profile.prototype.data.colour14 = "rgb(0,0,184)";
-Profile.prototype.data.colour15 = "rgb(0,0,255)";
-Profile.prototype.data.colour16 = "rgb(184,0,184)";
-Profile.prototype.data.colour17 = "rgb(255,0,255)";
-Profile.prototype.data.colour18 = "rgb(0,184,184)";
-Profile.prototype.data.colour19 = "rgb(0,255,255)";
-Profile.prototype.data.colour20 = "rgb(184,184,184)";
-Profile.prototype.data.colour21 = "rgb(255,255,255)";
 
 function ProfileService($http) {
 	// TODO Persistence for profiles

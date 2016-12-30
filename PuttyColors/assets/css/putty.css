@@ -1,7 +1,3 @@
-html,body {
-	background-color: #DEDEDE;
-}
-
 html {
 	position: relative;
 	min-height: 100%;
@@ -116,8 +112,36 @@ div.putty-preview .content p {
 	height: auto;
 }
 
-.modal-dialog.modal-fit .modal-content .fa-spin {
+.modal-dialog.modal-fit .modal-content .fa-spin
+{
 	line-height: inherit;
+}
+
+.profileBar {
+	display: flex;
+	align-items: center;
+	-ms-flex-flow: wrap;
+	-webkit-flex-flow: wrap;
+	flex-flow: wrap;
+	height: auto;
+	min-height: 34px;
+}
+
+	.profileBar .item {
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+		width: 24px;
+		height: 24px;
+		border: solid 1px #cccccc;
+		margin: 1px 1px;
+		cursor: pointer;
+	}
+
+.profileBar .item.active {
+	border-width: 2px;
+	border-color: #337ab7;
+	margin: 0;
 }
 
 footer {

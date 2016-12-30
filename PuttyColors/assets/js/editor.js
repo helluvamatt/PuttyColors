@@ -1,8 +1,8 @@
-﻿var module = angular.module('puttycolors-editor', ['puttycolors-profiles', 'angularSpectrumColorpicker']);
+﻿var module = angular.module('puttycolors-editor', ['puttycolors-profiles', 'puttycolors-tinycolor', 'minicolors']);
 
 module.controller('editorController', ['$scope', 'profileService', function ($scope, profileService) {
 
-	$scope.colors = [
+	$scope.previewCells = [
 		"default",
 		"black  ",
 		"red    ",
@@ -18,10 +18,26 @@ module.controller('editorController', ['$scope', 'profileService', function ($sc
 		return ["bg-" + angular.element.trim(bgColorName), "fg-" + angular.element.trim(fgColorName), { "bold": isBold }];
 	};
 
-	$scope.buildeditorProfile = function () {
+	$scope.navColor = function ($event) {
+		if ($event.keyCode == 39) {
+			// right (+1)
+			var index = $scope.currentColor.index + 1;
+			if (index < $scope.editorProfile.length) {
+				$scope.currentColor = $scope.editorProfile[index];
+			}
+		} else if ($event.keyCode == 37) {
+			// left (-1)
+			var index = $scope.currentColor.index - 1;
+			if (index > -1) {
+				$scope.currentColor = $scope.editorProfile[index];
+			}
+		}
+	};
+
+	var buildEditorProfile = function () {
 		var editorProfile = [];
 		angular.forEach(ProfileDataKeys, function (propName, index) {
-			editorProfile.push({ name: propName, label: ProfileColorNames[index], color: tinycolor(profileService.currentProfile.data[propName]) });
+			editorProfile.push({ name: propName, label: ProfileColorNames[index], index: index, color: tinycolor(profileService.currentProfile.data[propName]) });
 		});
 		$scope.editorProfile = editorProfile;
 		$scope.currentColor = $scope.editorProfile[0];
@@ -31,38 +47,13 @@ module.controller('editorController', ['$scope', 'profileService', function ($sc
 		$scope.authorUrl = profileService.currentProfile.url;
 	};
 
-	var setColorFields = function () {
-		$scope.currentColorHex = $scope.currentColor.color.toHexString();
-		$scope.currentColorRgb = $scope.currentColor.color.toRgb();
-	};
-
 	// Entire profile changed
-	$scope.$watch(function () { return profileService.currentProfile }, $scope.buildEditorProfile);
+	$scope.$watch(function () { return profileService.currentProfile }, buildEditorProfile);
 
 	// Selected color within profile changed
-	$scope.$watch("currentColor", function () {
-		setColorFields();
-	});
 	$scope.$watch("currentColor.color", function () {
-		setColorFields();
 		profileService.currentProfile.data[$scope.currentColor.name] = $scope.currentColor.color.toRgbString();
 	});
-
-	// Hex changed
-	$scope.$watch("currentColorHex", function () {
-		// Only set the new color in the model if it is actually a new color
-		var newColor = tinycolor($scope.currentColorHex);
-		if ($scope.currentColor.color.toRgbString() != newColor.toRgbString())
-			$scope.currentColor.color = newColor;
-	});
-
-	// RGB changed
-	$scope.$watch("currentColorRgb", function () {
-		// Only set the new color in the model if it is actually a new color
-		var newColor = tinycolor($scope.currentColorRgb);
-		if ($scope.currentColor.color.toRgbString() != newColor.toRgbString())
-			$scope.currentColor.color = newColor;
-	}, true);
 
 	// Other fields changed
 	$scope.$watch("profileName", function () { profileService.currentProfile.name = $scope.profileName; });
@@ -71,6 +62,6 @@ module.controller('editorController', ['$scope', 'profileService', function ($sc
 	$scope.$watch("authorUrl", function () { profileService.currentProfile.url = $scope.authorUrl; });
 
 	if (!profileService.currentProfile) profileService.currentProfile = new Profile();
-	else $scope.buildeditorProfile();
+	else buildEditorProfile();
 
 }]);

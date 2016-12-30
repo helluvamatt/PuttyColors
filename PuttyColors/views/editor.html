@@ -1,4 +1,4 @@
-﻿<form class="container-fluid">
+﻿<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-sm-12">
 			<div class="putty-preview">
@@ -15,76 +15,53 @@
 				<div class="content preview-content">
 					<p><span class="fg-green bold">putty</span>@<span class="fg-blue bold">server</span> ~ $ colors.sh</p>
 					<p>             default  black    red    green   yellow  blue   magenta  cyan    white  </p>
-					<div ng-repeat="colorY in colors track by $index">
-						<p>{{colorY}}      <span ng-repeat="colorX in colors track by $index" ng-class="getClassesForCell(colorY, colorX, false)">  gYw   </span></p>
-						<p>{{colorY}} bold <span ng-repeat="colorX in colors track by $index" ng-class="getClassesForCell(colorY, colorX, true)">  gYw   </span></p>
+					<div ng-repeat="cellY in previewCells track by $index">
+						<p>{{cellY}}      <span ng-repeat="cellX in previewCells track by $index" ng-class="getClassesForCell(cellY, cellX, false)">  gYw   </span></p>
+						<p>{{cellY}} bold <span ng-repeat="cellX in previewCells track by $index" ng-class="getClassesForCell(cellY, cellX, true)">  gYw   </span></p>
 					</div>
 					<p><span class="fg-green bold">putty</span>@<span class="fg-blue bold">server</span> ~ $ l<span class="cursor">s</span></p>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-12 form-horizontal">
-			<div class="form-group">
-				<label for="field_profile_name" class="col-sm-3 col-xs-12 control-label">Profile Name</label>
-				<div class="col-sm-9 col-xs-12">
-					<input type="text" id="field_profile_name" name="author" class="form-control" placeholder="Profile Name" ng-model="profileName" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="field_session_name" class="col-sm-3 col-xs-12 control-label">Session Name</label>
-				<div class="col-sm-9 col-xs-12">
-					<input type="text" id="field_session_name" name="session_name" class="form-control" placeholder="Default Session" ng-model="sessionName" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="field_author" class="col-sm-3 col-xs-12 control-label">Author</label>
-				<div class="col-sm-9 col-xs-12">
-					<input type="text" id="field_author" name="author" class="form-control" placeholder="Author" ng-model="authorName" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="field_author_url" class="col-sm-3 col-xs-12 control-label">URL</label>
-				<div class="col-sm-9 col-xs-12">
-					<input type="text" id="field_author_url" name="author_url" class="form-control" placeholder="URL" ng-model="authorUrl" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="color_selection" class="col-sm-3 col-xs-12 control-label">Colors</label>
-				<div class="col-sm-9 col-xs-12">
-					<select class="form-control" ng-options="color as color.label for color in editorProfile track by color.name" ng-model="currentColor"></select>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-offset-3 col-md-5 col-sm-12">
-					<div spectrum-colorpicker ng-model="currentColorHex" format="'hex'" options="{flat: true, showButtons: false}"></div>
-				</div>
-				<div class="col-md-4 col-sm-12 form-horizontal">
-					<div class="form-group">
-						<label for="field_cp_red" class="control-label col-sm-3 col-xs-4">Red</label>
-						<div class="col-sm-4 col-xs-8">
-							<input type="text" id="field_cp_red" name="cp_red" ng-model="currentColorRgb.r" class="form-control">
-						</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="form-horizontal">
+				<div class="form-group">
+					<label for="field_profile_name" class="col-md-3 col-sm-2 col-xs-12 control-label">Profile Name</label>
+					<div class="col-md-9 col-sm-10 col-xs-12">
+						<input type="text" id="field_profile_name" name="author" class="form-control" placeholder="Profile Name" ng-model="profileName" />
 					</div>
-					<div class="form-group">
-						<label for="field_cp_green" class="control-label col-sm-3 col-xs-4">Green</label>
-						<div class="col-sm-4 col-xs-8">
-							<input type="text" id="field_cp_green" name="cp_green" ng-model="currentColorRgb.g" class="form-control">
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="field_session_name" class="col-md-3 col-sm-2 col-xs-12 control-label">Session Name</label>
+					<div class="col-md-9 col-sm-10 col-xs-12">
+						<input type="text" id="field_session_name" name="session_name" class="form-control" placeholder="Default Session" ng-model="sessionName" />
 					</div>
-					<div class="form-group">
-						<label for="field_cp_blue" class="control-label col-sm-3 col-xs-4">Blue</label>
-						<div class="col-sm-4 col-xs-8">
-							<input type="text" id="field_cp_blue" name="cp_blue" ng-model="currentColorRgb.b" class="form-control">
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="field_author" class="col-md-3 col-sm-2 col-xs-12 control-label">Author</label>
+					<div class="col-md-9 col-sm-10 col-xs-12">
+						<input type="text" id="field_author" name="author" class="form-control" placeholder="Author" ng-model="authorName" />
 					</div>
-					<div class="form-group">
-						<label for="field_cp_hex" class="control-label col-sm-3 col-xs-4">Hex:</label>
-						<div class="col-sm-6 col-xs-8">
-							<input type="text" id="field_cp_hex" name="cp_hex" ng-model="currentColorHex" class="form-control">
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="field_author_url" class="col-md-3 col-sm-2 col-xs-12 control-label">URL</label>
+					<div class="col-md-9 col-sm-10 col-xs-12">
+						<input type="text" id="field_author_url" name="author_url" class="form-control" placeholder="URL" ng-model="authorUrl" />
 					</div>
+				</div>
+			</div>
+			<div class="well">
+				<div class="form-group">
+					<label class="control-label">Color Type</label>
+					<div class="profileBar form-control" ng-keydown="navColor($event)" tabindex="0">
+						<div href="Javascript:;" ng-repeat="color in editorProfile track by color.name" ng-click="$parent.currentColor = color" class="item" ng-class="{'active': color.name == currentColor.name}" ng-style="{'background-color': color.color.toHexString()}" uib-tooltip="{{color.label}}" tooltip-append-to-body="true"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="field_color" class="control-label">{{currentColor.label}}</label>
+					<input type="text" id="field_color" color-value="hex" ng-model="currentColor.color" minicolors class="form-control" />
 				</div>
 			</div>
 		</div>
 	</div>
-</form>
+</div>
