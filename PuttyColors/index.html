@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.css" />
 	<link rel="stylesheet" href="assets/css/font-awesome.css" />
 	<link rel="stylesheet" href="assets/css/putty.css" />
+	<link rel="stylesheet" href="assets/themes/metro-red/theme.css" />
+	<link rel="stylesheet" href="assets/themes/luna-blue/theme.css" />
+	<link rel="stylesheet" href="assets/themes/luna-silver/theme.css" />
+	<link rel="stylesheet" href="assets/themes/ten/theme.css" />
+	<link rel="stylesheet" href="assets/themes/classic/theme.css" />
 	<link rel="icon" type="image/png" href="assets/img/putty-16.png" />
 	<style type="text/css" preview-style></style>
 	<base href="/" />
 </head>
-<body ng-controller="mainController" ng-init="isMainNavCollapsed = true">
+<body ng-controller="mainController">
 	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -26,7 +31,7 @@
 				<a href="/" class="navbar-brand">PuTTY Colors</a>
 			</div>
 			<div class="collapse navbar-collapse" uib-collapse="isMainNavCollapsed" id="main_nav">
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav">
 					<li ng-class="{active: isActive('presets')}"><a href="presets" nav-action="presets"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Load Preset</a></li>
 					<li ng-class="{active: isActive('import')}"><a href="import" nav-action="import"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Import</a></li>
 					<li ng-class="{active: isActive('export')}"><a href="export" nav-action="export"><i class="fa fa-share" aria-hidden="true"></i>&nbsp;Export</a></li>
@@ -59,7 +64,10 @@
 	<div ng-view></div>
 
 	<footer>
-		<strong>&copy; <span date-now="yyyy"></span> </strong> Matt Schneeberger / <a href="http://www.schneenet.com/" target="_blank">SCHNEENET Internet Services</a> -- <a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">License</a> -- <a href="about" nav-action="about">About</a>
+		<div><strong>&copy; <span date-now="yyyy"></span> </strong> Matt Schneeberger</div>
+		<div>&nbsp;--&nbsp;<a href="http://www.schneenet.com/" target="_blank">SCHNEENET Internet Services</a></div>
+		<div>&nbsp;--&nbsp;<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">License</a></div>
+		<div>&nbsp;--&nbsp;<a href="about" nav-action="about">About</a></div>
 	</footer>
 
 	<script src="assets/js/vendor/tinycolor.js"></script>

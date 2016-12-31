@@ -14,6 +14,30 @@ module.controller('editorController', ['$scope', 'profileService', function ($sc
 		"white  "
 	];
 
+	$scope.themes = [
+		{
+			label: "Ten",
+			name: "theme-ten"
+		},
+		{
+			label: "Metro Red",
+			name: "theme-metro-red"
+		},
+		{
+			label: "Luna Blue",
+			name: "theme-luna-blue"
+		},
+		{
+			label: "Luna Silver",
+			name: "theme-luna-silver"
+		},
+		{
+			label: "Classic",
+			name: "theme-classic"
+		}
+	];
+	$scope.theme = $scope.themes[0];
+
 	$scope.getClassesForCell = function (fgColorName, bgColorName, isBold) {
 		return ["bg-" + angular.element.trim(bgColorName), "fg-" + angular.element.trim(fgColorName), { "bold": isBold }];
 	};

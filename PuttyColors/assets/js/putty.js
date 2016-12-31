@@ -82,9 +82,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 		}
 	});
 	$routeProvider.when("/import", {
-		templateUrl: 'views/modal-import.html',
+		//templateUrl: 'views/modal-import.html',
+		template: '',
 		controller: 'importController',
-		active: 'import'
+		active: 'import',
 	});
 	$routeProvider.when("/export", {
 		templateUrl: 'views/modal-export.html',
@@ -115,13 +116,20 @@ app.controller('presetsController', ['$scope', '$location', 'profileService', 'p
 	};
 }]);
 
-app.controller('importController', ['$scope', function ($scope) {
+app.controller('importController', ['$scope', '$location', '$timeout', function ($scope, $location, $timeout) {
 	$scope.$root.$broadcast(AlertEvents.ShowAlert, new Alert("This is not implemented", "Error", AlertTypes.Error));
+	$timeout(function () {
+		$location.path("/");
+	}, 10);
+
 	// TODO Import controller
+	var registryImportRegex = /^([ -~]+?)\s*\=\s*\"(\d{1,3})\,(\d{1,3})\,(\d{1,3})\"$/gm;
 }]);
 
 app.controller('mainController', ['$scope', '$route', function ($scope, $route) {
 	$scope.isActive = function (navItem) {
 		return $route.current && $route.current.active == navItem;
 	};
+
+	$scope.isMainNavCollapsed = true;
 }]);

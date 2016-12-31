@@ -33,7 +33,10 @@ function AlertService($rootScope) {
 		that.currentAlerts.push(alert);
 	});
 	$rootScope.$on(AlertEvents.FatalException, function (event, exception, cause) {
-		that.currentAlerts.push(new Alert(exception, "Fatal Error Occurred", AlertTypes.Error)); // TODO May need to be tweaked depending on what the exception and cause are
+		that.currentAlerts.push(new Alert(exception, "Fatal Error Occurred", AlertTypes.Error));
+	});
+	$rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
+		that.currentAlerts.push(new Alert(rejection, "Error", AlertTypes.Error));
 	});
 };
 AlertService.prototype.currentAlerts = [];

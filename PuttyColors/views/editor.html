@@ -1,25 +1,37 @@
 ﻿<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-6 col-sm-12">
+		<div class="col-md-6 col-sm-12 form-horizontal" ng-class="theme.name">
+			<div class="form-group">
+				<label for="field_theme" class="col-sm-2 col-xs-12 control-label">Theme</label>
+				<div class="col-sm-10 col-xs-12">
+					<select ng-options="t.label for t in themes" ng-model="theme" class="form-control"></select>
+				</div>
+			</div>
 			<div class="putty-preview">
-				<div class="border-top">
-					<img src="assets/img/border_top_left.png" alt="tl" class="pull-left" /> <img src="assets/img/border_top_icon.png" alt="icon" class="pull-left" />
-					<div class="title">PuTTY<span ng-show="sessionName"> -- {{sessionName}}</span></div>
-					<img src="assets/img/border_top_right.png" alt="tr" class="pull-right" />
-				</div>
-				<div class="border-left"></div>
-				<div class="border-right"></div>
-				<div class="border-bottom">
-					<img src="assets/img/border_bottom_left.png" alt="bl" class="pull-left" /> <img src="assets/img/border_bottom_right.png" alt="br" class="pull-right" />
-				</div>
-				<div class="content preview-content">
-					<p><span class="fg-green bold">putty</span>@<span class="fg-blue bold">server</span> ~ $ colors.sh</p>
-					<p>             default  black    red    green   yellow  blue   magenta  cyan    white  </p>
-					<div ng-repeat="cellY in previewCells track by $index">
-						<p>{{cellY}}      <span ng-repeat="cellX in previewCells track by $index" ng-class="getClassesForCell(cellY, cellX, false)">  gYw   </span></p>
-						<p>{{cellY}} bold <span ng-repeat="cellX in previewCells track by $index" ng-class="getClassesForCell(cellY, cellX, true)">  gYw   </span></p>
+				<div class="row-border-top">
+					<div class="border-top-left"></div>
+					<div class="icon">
+						<img src="assets/img/putty-16.png" alt="icon" title="PuTTY Icon" />
 					</div>
-					<p><span class="fg-green bold">putty</span>@<span class="fg-blue bold">server</span> ~ $ l<span class="cursor">s</span></p>
+					<div class="title">PuTTY<span ng-show="sessionName"> -- {{sessionName}}</span></div>
+					<div class="border-top-right"></div>
+				</div>
+				<div class="row-content">
+					<div class="border-left"></div>
+					<div class="content preview-content">
+						<p><span class="fg-green bold">putty</span>@<span class="fg-blue bold">server</span> ~ $ colors.sh</p>
+						<p>             default  black    red    green   yellow  blue   magenta  cyan    white  </p>
+						<div ng-repeat="cellY in previewCells track by $index">
+							<p>{{cellY}}      <span ng-repeat="cellX in previewCells track by $index" ng-class="getClassesForCell(cellY, cellX, false)">  gYw   </span></p>
+							<p>{{cellY}} bold <span ng-repeat="cellX in previewCells track by $index" ng-class="getClassesForCell(cellY, cellX, true)">  gYw   </span></p>
+						</div>
+						<p><span class="fg-green bold">putty</span>@<span class="fg-blue bold">server</span> ~ $ l<span class="cursor">s</span></p>
+					</div>
+					<div class="border-right"></div>
+				</div>
+				<div class="row-border-bottom">
+					<div class="border-bottom-left"></div>
+					<div class="border-bottom-right"></div>
 				</div>
 			</div>
 		</div>
@@ -60,6 +72,24 @@
 				<div class="form-group">
 					<label for="field_color" class="control-label">{{currentColor.label}}</label>
 					<input type="text" id="field_color" color-value="hex" ng-model="currentColor.color" minicolors class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="field_red_component" class="control-label">Red Component</label>
+					<div class="row">
+						<div color-value="red" ng-model="currentColor.color" color-component-spinner="red" read-only field-id="field_red_component" class="col-sm-4 col-xs-12"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="field_green_component" class="control-label">Green Component</label>
+					<div class="row">
+						<div color-value="green" ng-model="currentColor.color" color-component-spinner="green" read-only field-id="field_green_component" class="col-sm-4 col-xs-12"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="field_blue_component" class="control-label">Blue Component</label>
+					<div class="row">
+						<div color-value="blue" ng-model="currentColor.color" color-component-spinner="blue" read-only field-id="field_blue_component" class="col-sm-4 col-xs-12"></div>
+					</div>
 				</div>
 			</div>
 		</div>

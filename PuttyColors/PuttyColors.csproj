@@ -101,15 +101,44 @@
     <Content Include="assets\css\putty.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="assets\img\border_bottom_left.png" />
-    <Content Include="assets\img\border_bottom_right.png" />
-    <Content Include="assets\img\border_bottom_tile.png" />
-    <Content Include="assets\img\border_left_tile.png" />
-    <Content Include="assets\img\border_right_tile.png" />
-    <Content Include="assets\img\border_top_icon.png" />
-    <Content Include="assets\img\border_top_left.png" />
-    <Content Include="assets\img\border_top_right.png" />
-    <Content Include="assets\img\border_top_tile.png" />
+    <Content Include="assets\themes\classic\border_bottom_left.png" />
+    <Content Include="assets\themes\classic\border_bottom_right.png" />
+    <Content Include="assets\themes\classic\border_bottom_tile.png" />
+    <Content Include="assets\themes\classic\border_left_tile.png" />
+    <Content Include="assets\themes\classic\border_right_tile.png" />
+    <Content Include="assets\themes\classic\border_top_left.png" />
+    <Content Include="assets\themes\classic\border_top_right.png" />
+    <Content Include="assets\themes\classic\border_top_tile.png" />
+    <Content Include="assets\themes\classic\theme.css" />
+    <Content Include="assets\themes\luna-blue\border_bottom_left.png" />
+    <Content Include="assets\themes\luna-blue\border_bottom_right.png" />
+    <Content Include="assets\themes\luna-blue\border_bottom_tile.png" />
+    <Content Include="assets\themes\luna-blue\border_left_tile.png" />
+    <Content Include="assets\themes\luna-blue\border_right_tile.png" />
+    <Content Include="assets\themes\luna-blue\border_top_icon_bg.png" />
+    <Content Include="assets\themes\luna-blue\border_top_left.png" />
+    <Content Include="assets\themes\luna-blue\border_top_right.png" />
+    <Content Include="assets\themes\luna-blue\border_top_tile.png" />
+    <Content Include="assets\themes\luna-blue\theme.css" />
+    <Content Include="assets\themes\luna-silver\border_bottom_left.png" />
+    <Content Include="assets\themes\luna-silver\border_bottom_right.png" />
+    <Content Include="assets\themes\luna-silver\border_bottom_tile.png" />
+    <Content Include="assets\themes\luna-silver\border_left_tile.png" />
+    <Content Include="assets\themes\luna-silver\border_right_tile.png" />
+    <Content Include="assets\themes\luna-silver\border_top_left.png" />
+    <Content Include="assets\themes\luna-silver\border_top_right.png" />
+    <Content Include="assets\themes\luna-silver\border_top_tile.png" />
+    <Content Include="assets\themes\luna-silver\footer-tile.png" />
+    <Content Include="assets\themes\luna-silver\theme.css" />
+    <Content Include="assets\themes\metro-red\border_bottom_left.png" />
+    <Content Include="assets\themes\metro-red\border_bottom_right.png" />
+    <Content Include="assets\themes\metro-red\border_bottom_tile.png" />
+    <Content Include="assets\themes\metro-red\border_left_tile.png" />
+    <Content Include="assets\themes\metro-red\border_right_tile.png" />
+    <Content Include="assets\themes\metro-red\border_top_icon.png" />
+    <Content Include="assets\themes\metro-red\border_top_left.png" />
+    <Content Include="assets\themes\metro-red\border_top_right.png" />
+    <Content Include="assets\themes\metro-red\border_top_tile.png" />
     <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\putty-128.png" />
     <Content Include="assets\img\putty-16.png" />
@@ -130,6 +159,9 @@
     <Content Include="assets\js\vendor\jquery.minicolors.js" />
     <Content Include="assets\js\vendor\tinycolor.js" />
     <Content Include="assets\js\vendor\ui-bootstrap-tpls.js" />
+    <Content Include="assets\themes\metro-red\theme.css" />
+    <Content Include="assets\themes\ten\border_top_right.png" />
+    <Content Include="assets\themes\ten\theme.css" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="assets\fonts\fontawesome-webfont.eot" />
@@ -170,6 +202,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

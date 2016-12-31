@@ -1,0 +1,35 @@
+﻿.theme-ten .putty-preview {
+	background-color: #ffffff;
+	border: solid 1px #aaaaaa;
+	-webkit-box-shadow: 0px 0px 10px 1px rgba(170,170,170,1);
+	-moz-box-shadow: 0px 0px 10px 1px rgba(170,170,170,1);
+	box-shadow: 0px 0px 10px 1px rgba(170,170,170,1);
+}
+
+.theme-ten .putty-preview .row-border-top {
+	height: 28px;
+	line-height: 28px;
+}
+
+	.theme-ten .putty-preview .row-border-top .border-top-left,
+	.theme-ten .putty-preview .row-border-top .border-top-right {
+		width: 5px;
+		height: 28px;
+	}
+
+	.theme-ten .putty-preview .row-border-top .title {
+		text-align: center;
+		font-family: "Segoe UI", Verdana, sans-serif;
+		font-size: 12pt;
+	}
+
+	.theme-ten .putty-preview .row-border-top .border-top-right {
+		background-image: url('border_top_right.png');
+		width: 130px;
+	}
+
+.theme-ten .putty-preview .row-content .border-left,
+.theme-ten .putty-preview .row-content .border-right,
+.theme-ten .putty-preview .row-border-bottom {
+	display: none;
+}

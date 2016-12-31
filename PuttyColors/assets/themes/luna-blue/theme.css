@@ -1,0 +1,79 @@
+﻿.theme-luna-blue .putty-preview {
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	-webkit-box-shadow: 0px 0px 10px 1px rgba(170,170,170,1);
+	-moz-box-shadow: 0px 0px 10px 1px rgba(170,170,170,1);
+	box-shadow: 0px 0px 10px 1px rgba(170,170,170,1);
+}
+
+.theme-luna-blue .putty-preview .row-border-top {
+	height: 30px;
+	line-height: 30px;
+}
+
+	.theme-luna-blue .putty-preview .row-border-top .border-top-left,
+	.theme-luna-blue .putty-preview .row-border-top .border-top-right {
+		background-repeat: no-repeat;
+		width: 8px;
+		height: 30px;
+	}
+
+	.theme-luna-blue .putty-preview .row-border-top .border-top-left {
+		background-image: url('border_top_left.png');
+	}
+
+	.theme-luna-blue .putty-preview .row-border-top .icon {
+		background-image: url('border_top_icon_bg.png');
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 30px;
+	}
+
+	.theme-luna-blue .putty-preview .row-border-top .title {
+		background-image: url('border_top_tile.png');
+		background-repeat: repeat-x;
+		text-align: left;
+		color: #ffffff;
+		font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
+		font-size: 10pt;
+	}
+
+	.theme-luna-blue .putty-preview .row-border-top .border-top-right {
+		background-image: url('border_top_right.png');
+		width: 74px;
+	}
+
+.theme-luna-blue .putty-preview .row-content .border-left,
+.theme-luna-blue .putty-preview .row-content .border-right {
+	width: 4px;
+	background-repeat: repeat-y;
+}
+
+.theme-luna-blue .putty-preview .row-content .border-left {
+	background-image: url('border_left_tile.png');
+}
+
+.theme-luna-blue .putty-preview .row-content .border-right {
+	background-image: url('border_right_tile.png');
+}
+
+.theme-luna-blue .putty-preview .row-border-bottom {
+	height: 4px;
+	background-image: url('border_bottom_tile.png');
+	background-repeat: repeat-x;
+}
+
+	.theme-luna-blue .putty-preview .row-border-bottom .border-bottom-right,
+	.theme-luna-blue .putty-preview .row-border-bottom .border-bottom-left {
+		height: 4px;
+		width: 4px;
+		background-repeat: no-repeat;
+	}
+
+	.theme-luna-blue .putty-preview .row-border-bottom .border-bottom-left {
+		background-image: url('border_bottom_left.png');
+	}
+
+	.theme-luna-blue .putty-preview .row-border-bottom .border-bottom-right {
+		background-image: url('border_bottom_right.png');
+	}
