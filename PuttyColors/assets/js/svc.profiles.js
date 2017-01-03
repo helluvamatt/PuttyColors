@@ -1,6 +1,4 @@
-﻿var profilesModule = angular.module('puttycolors-profiles', []);
-
-var ProfileType = {
+﻿var ProfileType = {
 	Preset: "PRESET",
 	User: "USER"
 };
@@ -86,12 +84,10 @@ Profile.prototype.name = "Default";
 Profile.prototype.sessionName = "Default Session";
 Profile.prototype.author = "Simon Tatham";
 Profile.prototype.url = "http://www.chiark.greenend.org.uk/~sgtatham/putty/";
-Profile.prototype.type = ProfileType.User;
+Profile.prototype.type = ProfileType.Preset;
 Profile.prototype.data = {};
 
-function ProfileService($http) {
-	// TODO Persistence for profiles
-	// TODO This is a singleton, so until we add a real persistence database, there will only be one exposed "profile": the currently editing one	
+function ProfileService($http, $window, alertService) {
 
 	this.getPresets = function () {
 		return $http.get('assets/data/presets.json').then(function (response) {
@@ -102,7 +98,53 @@ function ProfileService($http) {
 			return presets;
 		});
 	};
+
+	var that = this;
+
+	var persistCustomProfiles = function () {
+		try {
+			$window.localStorage.setItem("customProfiles", angular.toJson(that.customProfiles));
+		} catch (e) {
+			console.error(e);
+			alertService.alert(new Alert(e, AlertTypes.Error, "Error Saving Custom Profiles"));
+		}
+	};
+
+	this.saveCustomProfile = function (profile) {
+		if (!profile) profile = this.currentProfile;
+		if (profile.type == ProfileType.Preset)
+			profile.type = ProfileType.User;
+		this.customProfiles[profile.name] = profile;
+		persistCustomProfiles();
+		alertService.alert(new Alert("Successfully saved profile.", AlertTypes.Success, null, 3000));
+	};
+
+	this.deleteCustomProfile = function (name) {
+		if (name in this.customProfiles) {
+			delete this.customProfiles[name];
+			persistCustomProfiles();
+			alertService.alert(new Alert("Successfully deleted profile.", AlertTypes.Success, null, 3000));
+		}
+		else {
+			alertService.alert(new Alert("Profile \"" + name + "\" does not exist.", AlertTypes.Warn, "Cannot Delete"));
+		}
+	};
+
+	// Load custom profiles
+	(function (that) {
+		var data;
+		try {
+			data = $window.localStorage.getItem("customProfiles");
+			if (data)
+				that.customProfiles = angular.fromJson(data);
+		} catch (e) {
+			console.error(e);
+			console.debug("Persisted data: %O", data);
+			alertService.alert(new Alert(e, AlertTypes.Error, "Error Loading Custom Profiles"));
+		}
+	})(this);
 }
 ProfileService.prototype.currentProfile = new Profile();
+ProfileService.prototype.customProfiles = {};
 
-profilesModule.service('profileService', ['$http', ProfileService]);
+angular.module('puttycolors.svc.profiles', ['puttycolors.svc.alerts']).service('profileService', ['$http', '$window', 'alertService', ProfileService]);

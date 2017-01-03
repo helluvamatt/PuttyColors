@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\animations.css" />
     <Content Include="assets\css\bootstrap-theme.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\font-awesome.css" />
@@ -101,6 +102,10 @@
     <Content Include="assets\css\putty.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\js\cfg.exports.js" />
+    <Content Include="assets\js\controllers.js" />
+    <Content Include="assets\js\directives.js" />
+    <Content Include="assets\js\svc.import.js" />
     <Content Include="assets\themes\classic\border_bottom_left.png" />
     <Content Include="assets\themes\classic\border_bottom_right.png" />
     <Content Include="assets\themes\classic\border_bottom_tile.png" />
@@ -139,23 +144,21 @@
     <Content Include="assets\themes\metro-red\border_top_left.png" />
     <Content Include="assets\themes\metro-red\border_top_right.png" />
     <Content Include="assets\themes\metro-red\border_top_tile.png" />
-    <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\putty-128.png" />
     <Content Include="assets\img\putty-16.png" />
     <Content Include="assets\img\putty-32.png" />
     <Content Include="assets\img\putty.ico" />
     <Content Include="assets\img\PuttyColors.png" />
-    <Content Include="assets\js\alerts.js" />
-    <Content Include="assets\js\angular-tinycolor.js" />
-    <Content Include="assets\js\editor.js" />
-    <Content Include="assets\js\export.js" />
+    <Content Include="assets\js\svc.alerts.js" />
+    <Content Include="assets\js\svc.tinycolor.js" />
+    <Content Include="assets\js\svc.export.js" />
     <Content Include="assets\js\vendor\angular-animate.js" />
     <Content Include="assets\js\vendor\angular-minicolors.js" />
     <Content Include="assets\js\vendor\angular-route.js" />
     <Content Include="assets\js\vendor\angular.js" />
     <Content Include="assets\js\vendor\jquery.js" />
-    <Content Include="assets\js\profiles.js" />
-    <Content Include="assets\js\putty.js" />
+    <Content Include="assets\js\svc.profiles.js" />
+    <Content Include="assets\js\app.js" />
     <Content Include="assets\js\vendor\jquery.minicolors.js" />
     <Content Include="assets\js\vendor\tinycolor.js" />
     <Content Include="assets\js\vendor\ui-bootstrap-tpls.js" />
@@ -187,13 +190,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="views\about.html" />
-    <Content Include="views\alerts.html" />
     <Content Include="views\editor.html" />
-    <Content Include="views\exports\preview_style.js" />
-    <Content Include="views\exports\windows_registry.js" />
+    <Content Include="views\modal-confirm.html" />
     <Content Include="views\modal-export.html" />
     <Content Include="views\modal-import.html" />
-    <Content Include="views\presets.html" />
+    <Content Include="views\profiles.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -59,7 +59,7 @@
 		return newVal;
 	}
 
-	var module = angular.module('puttycolors-tinycolor', ['puttycolors-tinycolor-tpls']);
+	var module = angular.module('puttycolors.svc.tinycolor', ['puttycolors.svc.tinycolor.tpls']);
 
 	module.directive('colorValue', [function () {
 		return {
@@ -134,7 +134,7 @@
 		}
 	}]);
 
-	angular.module('puttycolors-tinycolor-tpls', []).run(['$templateCache', function ($templateCache) {
+	angular.module('puttycolors.svc.tinycolor.tpls', []).run(['$templateCache', function ($templateCache) {
 
 		$templateCache.put('views/color-component-spinner.html',
 			'<div class="input-group">' +

@@ -1,41 +1,35 @@
-﻿<div class="modal static" tabindex="-1" role="dialog" aria-labelledby="modal_export_title">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" nav-action="/" class="close" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Export</h4>
-			</div>
-			<div class="modal-body form-horizontal">
-				<div ng-show="profileName" class="form-group">
-					<label class="col-sm-3 col-xs-12 control-label">Profile Name</label>
-					<div class="col-sm-9 col-xs-12">
-						<p class="form-control-static">{{profileName}}</p>
-					</div>
-				</div>
-				<div ng-show="authorName" class="form-group">
-					<label class="col-sm-3 col-xs-12 control-label">Author</label>
-					<div class="col-sm-9 col-xs-12">
-						<p class="form-control-static">{{authorName}}</p>
-					</div>
-				</div>
-				<div ng-show="authorUrl" class="form-group">
-					<label class="col-sm-3 col-xs-12 control-label">URL</label>
-					<div class="col-sm-9 col-xs-12">
-						<p class="form-control-static"><a href="{{authorUrl}}" target="_blank">{{authorUrl}}</a></p>
-					</div>
-				</div>
-				<div ng-show="templates.length > 0" class="form-group">
-					<label for="field_export_type" class="col-sm-3 col-xs-12 control-label">Export Type</label>
-					<div class="col-sm-9 col-xs-12">
-						<select id="field_export_type" ng-options="tpl as tpl.title for tpl in templates track by tpl.name" ng-model="selectedTemplate" class="form-control"></select>
-					</div>
-				</div>
-				<textarea ng-show="code" rows="12" class="form-control">{{code}}</textarea>
-				<div ng-hide="templates.length > 0" class="alert alert-danger">There are no export templates available.</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" nav-action="/">Close</button>
-			</div>
+﻿<div class="modal-header">
+	<button type="button" ng-click="$close()" class="close" aria-hidden="true">&times;</button>
+	<h4 class="modal-title">Export</h4>
+</div>
+<div class="modal-body form-horizontal">
+	<div ng-show="profileName" class="form-group">
+		<label class="col-sm-3 col-xs-12 control-label">Profile Name</label>
+		<div class="col-sm-9 col-xs-12">
+			<p class="form-control-static">{{profileName}}</p>
 		</div>
 	</div>
+	<div ng-show="authorName" class="form-group">
+		<label class="col-sm-3 col-xs-12 control-label">Author</label>
+		<div class="col-sm-9 col-xs-12">
+			<p class="form-control-static">{{authorName}}</p>
+		</div>
+	</div>
+	<div ng-show="authorUrl" class="form-group">
+		<label class="col-sm-3 col-xs-12 control-label">URL</label>
+		<div class="col-sm-9 col-xs-12">
+			<p class="form-control-static"><a href="{{authorUrl}}" target="_blank">{{authorUrl}}</a></p>
+		</div>
+	</div>
+	<div ng-show="templates.length > 0" class="form-group">
+		<label for="field_export_type" class="col-sm-3 col-xs-12 control-label">Export Type</label>
+		<div class="col-sm-9 col-xs-12">
+			<select id="field_export_type" ng-options="tpl as tpl.title for tpl in templates track by tpl.name" ng-model="selectedTemplate" class="form-control"></select>
+		</div>
+	</div>
+	<textarea ng-show="code" rows="12" class="form-control">{{code}}</textarea>
+	<div ng-hide="templates.length > 0" class="alert alert-danger">There are no export templates available.</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" ng-click="$close()">Close</button>
 </div>

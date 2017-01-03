@@ -12,6 +12,10 @@ body {
 	font-family: "Consolas", "Courier New", monospace;
 }
 
+[ng-cloak] {
+	display: none !important;
+}
+
 .putty-preview {
 	width: 100%;
 	height: auto;
