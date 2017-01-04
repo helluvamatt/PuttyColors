@@ -2,10 +2,18 @@
 	<button type="button" ng-click="$close()" class="close" aria-hidden="true">&times;</button>
 	<h4 class="modal-title">Import</h4>
 </div>
-<div class="modal-body">
-	<textarea ng-model="importCode" rows="12" class="form-control" placeholder="Paste Windows Registry code here..."></textarea>
+<div class="modal-body form-horizontal">
+	<div ng-show="error" class="alert alert-danger">Import failed: {{error}}</div>
+	<div ng-show="parsers.length > 0" class="form-group">
+		<label for="field_import_type" class="col-sm-3 col-xs-12 control-label">Import Type</label>
+		<div class="col-sm-9 col-xs-12">
+			<select id="field_import_type" ng-options="parser as parser.title for parser in parsers track by parser.name" ng-model="selectedParser" class="form-control"></select>
+		</div>
+	</div>
+	<textarea ng-show="parsers.length > 0" rows="12" class="form-control" ng-model="importData"></textarea>
+	<div ng-hide="parsers.length > 0" class="alert alert-danger">There are no import parsers available.</div>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-primary" ng-click="doImport()">Import</button>
-	<button type="button" class="btn btn-default" ng-click="$close()">Cancel</button>
+	<button type="button" class="btn btn-primary" ng-click="import()" ng-show="parsers.length > 0">Import</button>
+	<button type="button" class="btn btn-default" ng-click="$close(false)">Cancel</button>
 </div>

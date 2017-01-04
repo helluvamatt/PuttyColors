@@ -1,4 +1,4 @@
-angular.module('puttycolors.app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'puttycolors.svc.alerts', 'puttycolors.svc.profiles', 'puttycolors.svc.export', 'puttycolors.controllers', 'puttycolors.directives', 'puttycolors.cfg.exports'])
+angular.module('puttycolors.app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'puttycolors.svc.alerts', 'puttycolors.svc.profiles', 'puttycolors.svc.export', 'puttycolors.controllers', 'puttycolors.directives', 'puttycolors.cfg.exports', 'puttycolors.cfg.imports'])
 
 .factory('$exceptionHandler', ['$injector', function ($injector) {
 	return function (exception, cause) {

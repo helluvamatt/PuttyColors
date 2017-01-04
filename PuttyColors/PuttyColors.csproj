@@ -103,6 +103,7 @@
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\js\cfg.exports.js" />
+    <Content Include="assets\js\cfg.imports.js" />
     <Content Include="assets\js\controllers.js" />
     <Content Include="assets\js\directives.js" />
     <Content Include="assets\js\svc.import.js" />

@@ -15,4 +15,5 @@
 /// <reference path="assets/js/controllers.js" />
 /// <reference path="assets/js/directives.js" />
 /// <reference path="assets/js/cfg.exports.js" />
+/// <reference path="assets/js/cfg.imports.js" />
 /// <reference path="assets/js/app.js" />
