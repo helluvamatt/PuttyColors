@@ -5,26 +5,29 @@
 	Error: "danger"
 };
 
-function Alert(message, type, title, timeout) {
+function Alert(message, type, title, timeout, clearOnStateChange) {
 	if (message) this.message = message;
 	if (type) this.type = type;
 	if (title) this.title = title;
 	if (timeout) this.timeout = timeout;
+	if (clearOnStateChange) this.clearOnStateChange = true;
 }
 Alert.prototype.message = "";
 Alert.prototype.title = "";
 Alert.prototype.type = AlertTypes.Warn;
 Alert.prototype.timeout = null;
+Alert.prototype.clearOnStateChange = false;
 
 function AlertService($rootScope) {
 	var that = this;
-	$rootScope.$on("appFatalException", function (event, exception, cause) {
-		that.alert(new Alert(exception, AlertTypes.Error, "Fatal Error Occurred"));
-	});
-	$rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
-		that.alert(new Alert(rejection, AlertTypes.Error, "Error"));
+	$rootScope.$on('$stateChangeStart', function () {
+		var index = that.currentAlerts.length;
+		while (index--) {
+			if (that.currentAlerts[index].clearOnStateChange) that.closeAlert(index);
+		}
 	});
 };
+
 AlertService.prototype.currentAlerts = [];
 AlertService.prototype.closeAlert = function close(index) {
 	if (index > -1 && index < this.currentAlerts.length)

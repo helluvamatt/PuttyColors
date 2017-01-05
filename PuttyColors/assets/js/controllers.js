@@ -1,6 +1,6 @@
-﻿angular.module('puttycolors.controllers', ['ui.bootstrap', 'minicolors', 'puttycolors.svc.tinycolor', 'puttycolors.svc.alerts', 'puttycolors.svc.profiles', 'puttycolors.svc.export', 'puttycolors.svc.import'])
+﻿angular.module('puttycolors.controllers', ['ui.bootstrap', 'minicolors', 'puttycolors.svc.tinycolor', 'puttycolors.svc.alerts', 'puttycolors.svc.profiles', 'puttycolors.svc.export', 'puttycolors.svc.import', 'puttycolors.svc.share'])
 
-.controller('editorController', ['$scope', '$location', '$uibModal', 'profileService', 'exportService', function ($scope, $location, $uibModal, profileService, exportService) {
+.controller('editorController', ['$scope', '$location', '$stateParams', '$uibModal', 'profileService', 'exportService', 'sharedProfile', function ($scope, $location, $stateParams, $uibModal, profileService, exportService, sharedProfile) {
 
 	$scope.previewCells = [
 		"default",
@@ -70,6 +70,13 @@
 		});
 	};
 
+	$scope.shareProfile = function () {
+		$uibModal.open({
+			controller: 'shareController',
+			templateUrl: 'views/modal-share.html',
+		});
+	};
+
 	var buildEditorProfile = function () {
 		var editorProfile = [];
 		angular.forEach(ProfileDataKeys, function (propName, index) {
@@ -97,9 +104,15 @@
 	$scope.$watch("authorName", function () { profileService.currentProfile.author = $scope.authorName; });
 	$scope.$watch("authorUrl", function () { profileService.currentProfile.url = $scope.authorUrl; });
 
-	if (!profileService.currentProfile) profileService.currentProfile = new Profile();
-	else buildEditorProfile();
-
+	if (sharedProfile) {
+		profileService.currentProfile = sharedProfile;
+	}
+	else if (!profileService.currentProfile) {
+		profileService.currentProfile = new Profile();
+	}
+	else {
+		buildEditorProfile();
+	}
 }])
 
 .controller('profilesController', ['$scope', '$location', '$uibModal', 'profileService', 'presets', function ($scope, $location, $uibModal, profileService, presets) {
@@ -159,10 +172,10 @@
 				message: 'Are you sure you want to delete this profile?',
 				modalContext: 'danger'
 			}),
-		}).result.then(function(result) {
+		}).result.then(function (result) {
 			if (result) profileService.deleteCustomProfile(profile.name);
 		});
-		
+
 	};
 
 	var buildCustomProfileList = function () {
@@ -213,4 +226,12 @@
 			$scope.error = e;
 		}
 	};
+}])
+
+.controller('shareController', ['$scope', '$state', 'profileService', 'shareService', function ($scope, $state, profileService, shareService) {
+	shareService.shareProfile(profileService.currentProfile).then(function (id) {
+		$scope.shareUrl = $state.href('editor', { id: id }, { absolute: true });
+	}, function (rejection) {
+		$scope.shareError = rejection;
+	});
 }]);

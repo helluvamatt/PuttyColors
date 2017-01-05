@@ -18,7 +18,7 @@
 				element.addClass('ng-hide');
 			};
 
-			$rootScope.$on('$routeChangeStart', function (event, currentRoute, previousRoute) {
+			$rootScope.$on('$stateChangeStart', function (event, currentRoute, previousRoute) {
 				if (!timeout) {
 					timeout = $timeout(function () {
 						element.removeClass('ng-hide');
@@ -26,8 +26,8 @@
 				}
 			});
 
-			$rootScope.$on('$routeChangeSuccess', hideLoader);
-			$rootScope.$on('$routeChangeError', hideLoader);
+			$rootScope.$on('$stateChangeSuccess', hideLoader);
+			$rootScope.$on('$stateChangeError', hideLoader);
 			$rootScope.$on("appFatalException", hideLoader);
 		}
 	};

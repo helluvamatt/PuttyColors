@@ -29,13 +29,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="/" class="navbar-brand">PuTTY Colors</a>
+				<a ui-sref="editor" class="navbar-brand">PuTTY Colors</a>
 			</div>
 			<div class="collapse navbar-collapse" uib-collapse="isMainNavCollapsed" id="main_nav">
 				<ul class="nav navbar-nav">
-					<li ng-class="{active: isActive('editor')}"><a href="/"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;<span ng-show="currentProfile">&quot;{{currentProfile.name}}&quot;</span><span ng-hide="currentProfile">Editor</span></a></li>
-					<li ng-class="{active: isActive('profiles')}"><a href="profiles"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Profiles</a></li>
-					<li ng-class="{active: isActive('about')}"><a href="about"><i class="fa fa-info" aria-hidden="true"></i>&nbsp;About</a></li>
+					<li ui-sref-active="active"><a ui-sref="editor"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;<span ng-show="currentProfile">&quot;{{currentProfile.name}}&quot;</span><span ng-hide="currentProfile">Editor</span></a></li>
+					<li ui-sref-active="active"><a ui-sref="profiles"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Profiles</a></li>
+					<li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info" aria-hidden="true"></i>&nbsp;About</a></li>
 				</ul>
 			</div>
 		</div>
@@ -68,28 +68,31 @@
 		</div>
 	</div>
 
-	<div ng-view></div>
+	<div ui-view></div>
 
 	<footer>
 		<div><strong>&copy; <span date-now="yyyy"></span> </strong> Matt Schneeberger</div>
 		<div>&nbsp;--&nbsp;<a href="http://www.schneenet.com/" target="_blank">SCHNEENET Internet Services</a></div>
 		<div>&nbsp;--&nbsp;<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">License</a></div>
-		<div>&nbsp;--&nbsp;<a href="about">About</a></div>
+		<div>&nbsp;--&nbsp;<a ui-sref="about">About</a></div>
 	</footer>
 
 	<script src="assets/js/vendor/tinycolor.js"></script>
+	<script src="assets/js/vendor/tv4.js"></script>
 	<script src="assets/js/vendor/jquery.js"></script>
 	<script src="assets/js/vendor/jquery.minicolors.js"></script>
 	<script src="assets/js/vendor/angular.js"></script>
 	<script src="assets/js/vendor/angular-animate.js"></script>
-	<script src="assets/js/vendor/angular-route.js"></script>
 	<script src="assets/js/vendor/angular-minicolors.js"></script>
+	<script src="assets/js/vendor/angular-json-validator.js"></script>
+	<script src="assets/js/vendor/angular-ui-router.js"></script>
 	<script src="assets/js/vendor/ui-bootstrap-tpls.js"></script>
 	<script src="assets/js/svc.alerts.js"></script>
 	<script src="assets/js/svc.export.js"></script>
 	<script src="assets/js/svc.import.js"></script>
 	<script src="assets/js/svc.profiles.js"></script>
 	<script src="assets/js/svc.tinycolor.js"></script>
+	<script src="assets/js/svc.share.js"></script>
 	<script src="assets/js/controllers.js"></script>
 	<script src="assets/js/directives.js"></script>
 	<script src="assets/js/cfg.exports.js"></script>
