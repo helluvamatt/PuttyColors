@@ -3,6 +3,7 @@
 /// <reference path="bower_components/angular-animate/angular-animate.js" />
 /// <reference path="bower_components/angular-bootstrap/ui-bootstrap-tpls.js" />
 /// <reference path="bower_components/angular-json-validator/angular-json-validator.js" />
+/// <reference path="bower_components/angular-minicolors/angular-minicolors.js" />
 /// <reference path="bower_components/angular-ui-router/release/angular-ui-router.js" />
 /// <reference path="bower_components/jquery/dist/jquery.js" />
 /// <reference path="bower_components/jquery-minicolors/jquery.minicolors.js" />

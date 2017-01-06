@@ -12,7 +12,7 @@
             "taskName": "default",
             "args": [],
             "isBuildCommand": true,
-            "isWatching": true,
+            "isWatching": false,
             "problemMatcher": [
                 "$lessCompile",
                 "$tsc",
