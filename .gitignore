@@ -1,39 +1,15 @@
-*.pydevproject
-.metadata
-.gradle
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
-# sbteclipse plugin 
-.target
-
-# TeXlipse plugin
-.texlipse
-
-# Composer
-/vendor/
-composer.phar
-
-# Application specific
-/data/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+/bower_components
+/node_modules
+/www/assets
+/typings
+/vendor
 /app/logs/*.log
 /app/config.json
+.settings/
+.buildpath
+.project
