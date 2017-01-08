@@ -1,0 +1,19 @@
+{
+    "name": "helluvamatt/puttycolors",
+    "description": "PuttyColors",
+    "type": "project",
+    "license": "GPL-2.0",
+    "homepage": "https://github.com/helluvamatt/PuttyColors",
+    "authors": [
+        {
+            "name": "Matt Schneeberger",
+            "email": "helluvamatt@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "slim/twig-view": "^2.1",
+        "slim/php-view": "^2.2"
+    }
+}
