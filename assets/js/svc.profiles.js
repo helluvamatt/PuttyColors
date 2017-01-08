@@ -90,7 +90,7 @@ Profile.prototype.data = {};
 function ProfileService($http, $window, alertService) {
 
 	this.getPresets = function () {
-		return $http.get('assets/data/presets.json').then(function (response) {
+		return $http.get('data/presets.json').then(function (response) {
 			var presets = [];
 			angular.forEach(response.data, function (preset) {
 				presets.push(angular.extend(new Profile(), preset));
