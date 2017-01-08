@@ -24,4 +24,6 @@ $app->get("/[{id}]", function (Request $request, Response $response, $args) {
 	return $this->view->render($response, 'index.phtml', ['baseUrl' => $request->getUri()->getBasePath()]);
 })->setName('/');
 
+// TODO Routes for API
+
 $app->run();
