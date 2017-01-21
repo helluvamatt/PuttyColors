@@ -9,44 +9,56 @@ angular.module('puttycolors.app', ['ngAnimate', 'ui.bootstrap', 'ui.router', 'pu
 	};
 }])
 
-.config(['$stateProvider', '$locationProvider', '$qProvider', function ($stateProvider, $locationProvider, $qProvider) {
+.config(['$stateProvider', '$locationProvider', '$qProvider', '$uibTooltipProvider', function ($stateProvider, $locationProvider, $qProvider, $uibTooltipProvider) {
 
 	// Important: Work around "Possibly unhandled rejection" in ui-router for resolves
 	$qProvider.errorOnUnhandledRejections(false);
 
 	$locationProvider.html5Mode(true);
 
-	$stateProvider.state('profiles', {
-		url: '/profiles',
+	$stateProvider.state('browse', {
+		url: '/browse',
 		templateUrl: 'views/profiles.html',
-		controller: 'profilesController',
+		controller: 'browseController',
 		resolve: {
 			profileService: "profileService",
-			presets: function (profileService) { return profileService.getPresets(); }
+			profiles: function (profileService) { return profileService.getPublicProfiles(1); },
+			profilesCount: function(profileService) { return profileService.getCountPublicProfiles(); },
+		}
+	});
+	$stateProvider.state('myprofiles', {
+		url: '/myprofiles',
+		tempalteUrl: 'views/profiles.html',
+		controller: 'myProfilesController',
+		resolve: {
+			profileService: "profileService",
+			profiles: function (profileService) { return profileService.getMyProfiles(1); },
+			profilesCount: function(profileService) { return profileService.getCountMyProfiles(); }
 		}
 	});
 	$stateProvider.state('about', {
 		url: '/about',
-		templateUrl: 'views/about.html',
-		active: 'about',
+		templateUrl: 'views/about.html'
 	});
 	$stateProvider.state('editor', {
 		url: '/:id',
 		templateUrl: 'views/editor.html',
 		controller: 'editorController',
-		active: 'editor',
 		resolve: {
-			sharedProfile: ['$stateParams', 'shareService', function ($stateParams, shareService) {
-				if ($stateParams.id)
-					return shareService.getSharedProfile($stateParams.id).catch(function () {
+			sharedProfile: ['$stateParams', 'profileService', function ($stateParams, profileService) {
+				if ($stateParams.id) {
+					return profileService.getProfile($stateParams.id).catch(function () {
 						throw "Invalid shared profile.";
 					});
+				}
 			}]
 		}
 	});
+	
+	$uibTooltipProvider.options({appendToBody: true});
 }])
 
-.controller('mainController', ['$scope', 'profileService', 'alertService', function ($scope, profileService, alertService) {
+.controller('mainController', ['$scope', 'alertService', function ($scope, alertService) {
 	$scope.getCurrentAlerts = function () {
 		return alertService.currentAlerts;
 	};
@@ -56,8 +68,6 @@ angular.module('puttycolors.app', ['ngAnimate', 'ui.bootstrap', 'ui.router', 'pu
 	};
 
 	$scope.isMainNavCollapsed = true;
-	$scope.currentProfile = profileService.currentProfile;
-	$scope.$watch(function () { return profileService.currentProfile }, function () { $scope.currentProfile = profileService.currentProfile; });
 }])
 
 .run(['$rootScope', 'alertService', function ($rootScope, alertService) {

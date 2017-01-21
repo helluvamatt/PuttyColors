@@ -1,6 +1,7 @@
 ﻿var ProfileType = {
-	Preset: "PRESET",
-	User: "USER"
+	Public: 0,
+	Unlisted: 1,
+	Private: 2
 };
 
 var ProfileDataKeys = [
@@ -84,67 +85,86 @@ Profile.prototype.name = "Default";
 Profile.prototype.sessionName = "Default Session";
 Profile.prototype.author = "Simon Tatham";
 Profile.prototype.url = "http://www.chiark.greenend.org.uk/~sgtatham/putty/";
-Profile.prototype.type = ProfileType.Preset;
+Profile.prototype.type = ProfileType.Private;
 Profile.prototype.data = {};
 
-function ProfileService($http, $window, alertService) {
+function ProfileService($http, $q, $window) {
 
-	this.getPresets = function () {
-		return $http.get('data/presets.json').then(function (response) {
-			var presets = [];
-			angular.forEach(response.data, function (preset) {
-				presets.push(angular.extend(new Profile(), preset));
+	this.getPublicProfiles = function($page, $pageSize) {
+		return $http({
+			method: 'GET',
+			url: 'api/profiles/' + $page + '/' + $pageSize
+		}).then(function(response) {
+			var profiles = [];
+			angular.forEach(response.data, function(profile) {
+				profiles.push(angular.extend(new Profile(), profile));
 			});
-			return presets;
+			return profiles;
 		});
 	};
 
-	var that = this;
-
-	var persistCustomProfiles = function () {
-		try {
-			$window.localStorage.setItem("customProfiles", angular.toJson(that.customProfiles));
-		} catch (e) {
-			console.error(e);
-			alertService.alert(new Alert(e, AlertTypes.Error, "Error Saving Custom Profiles"));
-		}
+	this.getCountPublicProfiles = function() {
+		return $http({
+			method: 'GET',
+			url: 'api/profilescount',
+		}).then(function(response) {
+			return response.data.count;
+		});
 	};
 
-	this.saveCustomProfile = function (profile) {
-		if (!profile) profile = this.currentProfile;
-		if (profile.type == ProfileType.Preset)
-			profile.type = ProfileType.User;
-		this.customProfiles[profile.name] = profile;
-		persistCustomProfiles();
-		alertService.alert(new Alert("Successfully saved profile.", AlertTypes.Success, null, 3000));
+	this.getMyProfiles = function($page, $pageSize) {
+		// TODO Need to authenticate and provide a user
 	};
 
-	this.deleteCustomProfile = function (name) {
-		if (name in this.customProfiles) {
-			delete this.customProfiles[name];
-			persistCustomProfiles();
-			alertService.alert(new Alert("Successfully deleted profile.", AlertTypes.Success, null, 3000));
-		}
-		else {
-			alertService.alert(new Alert("Profile \"" + name + "\" does not exist.", AlertTypes.Warn, "Cannot Delete"));
-		}
+	this.getCountMyProfiles = function() {
+		// TODO Need to authenticate and provide a user
 	};
 
-	// Load custom profiles
-	(function (that) {
-		var data;
-		try {
-			data = $window.localStorage.getItem("customProfiles");
-			if (data)
-				that.customProfiles = angular.fromJson(data);
-		} catch (e) {
-			console.error(e);
-			console.debug("Persisted data: %O", data);
-			alertService.alert(new Alert(e, AlertTypes.Error, "Error Loading Custom Profiles"));
-		}
-	})(this);
+	this.saveProfile = function (profile) {
+		return $http({
+			method: 'POST',
+			url: 'api/profile',
+			data: profile
+		}).then(function(response) {
+			profile.id = response.data.id;
+			return profile;
+		}, function(rejection) {
+			$log.error("Failed to save profile: %O", rejection);
+			throw "Error saving profile. Please try again later.";
+		});
+	};
+
+	this.deleteProfile = function (profile) {
+		return $http({
+			method: 'DELETE',
+			url: 'api/profile/' + profile.id,
+		}).then(null, function(rejection) {
+			$log.warn("Failed to delete profile: %O", rejection);
+			throw new "Failed to delete profile: " + rejection.message; // TODO 
+		});
+	};
+
+	this.getProfile = function(id) {
+		return $http({
+			method: 'GET',
+			url: 'api/profile/' + id
+		}).then(function(response) {
+			return angular.extend(new Profile(), response.data);
+		});
+	};
+
+	this.getForks = function(id) {
+		return $http({
+			method: 'GET',
+			url: 'api/forks/' + id
+		}).then(function(response) {
+			var retVal = [];
+			angular.forEach(response.data, function(value) {
+				retVal.push(angular.extend(new Profile(), value));
+			});
+			return retVal;
+		});
+	};
 }
-ProfileService.prototype.currentProfile = new Profile();
-ProfileService.prototype.customProfiles = {};
 
-angular.module('puttycolors.svc.profiles', ['puttycolors.svc.alerts']).service('profileService', ['$http', '$window', 'alertService', ProfileService]);
+angular.module('puttycolors.svc.profiles', ['puttycolors.svc.alerts']).service('profileService', ['$http', '$q', '$window', ProfileService]);

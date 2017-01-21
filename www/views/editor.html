@@ -1,4 +1,4 @@
-﻿<div class="container-fluid">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-sm-12 form-horizontal" ng-class="theme.name">
 			<div class="form-group">
@@ -36,32 +36,65 @@
 			</div>
 		</div>
 		<div class="col-md-6 col-sm-12">
-			<div class="form-horizontal">
+			<form>
 				<div class="form-group">
-					<label for="field_profile_name" class="col-md-3 col-sm-2 col-xs-12 control-label">Profile Name</label>
-					<div class="col-md-9 col-sm-10 col-xs-12">
-						<input type="text" id="field_profile_name" name="author" class="form-control" placeholder="Profile Name" ng-model="profileName" />
+					<button type="button" class="btn btn-primary" ng-click="saveProfile()"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
+					<button type="button" class="btn btn-default" ng-click="exportProfile()"><i class="fa fa-share" aria-hidden="true"></i>&nbsp;Export</button>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="currentProfile.type" ng-value="0" />
+						<abbr title="" uib-tooltip="Visible in public listings">Public</abbr>
+						<span class="sr-only">Visible in public listings</span>
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="currentProfile.type" ng-value="1" />
+						<abbr title="" uib-tooltip="Only visible if you have the URL">Unlisted</abbr>
+						<span class="sr-only">Only visible if you have the URL</span>
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="currentProfile.type" ng-value="2" />
+						<abbr title="" uib-tooltip="Only visible to you">Private</abbr>
+						<span class="sr-only">Only visible to you</span>
+					</label>
+				</div>
+				<div class="form-group" ng-class="{'has-error': shareError}">
+					<label for="field_share_url" class="control-label">Share URL</label>
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="shareProfile()"><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</button>
+						</span>
+						<input type="text" id="field_share_url" ng-readonly="true" class="form-control" ng-value="shareUrl()" />
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ngclipboard ngclipboard-success="copiedSuccess(e)" ngclipboard-error="copiedError(e)" data-clipboard-target="#field_share_url"  uib-tooltip="{{copiedTooltipText}}" tooltip-is-open="copiedTooltipOpen" tooltip-trigger="'none'" ng-mouseleave="copiedTooltipOpen = false;">
+								<span class="sr-only">Copy to clipboard</span>
+								<i class="fa fa-clipboard" aria-hidden="true"></i>
+							</button>
+						</span>
 					</div>
+					<span class="help-block" ng-show="shareError">{{shareError}}</span>
 				</div>
 				<div class="form-group">
-					<label for="field_session_name" class="col-md-3 col-sm-2 col-xs-12 control-label">Session Name</label>
-					<div class="col-md-9 col-sm-10 col-xs-12">
-						<input type="text" id="field_session_name" name="session_name" class="form-control" placeholder="Default Session" ng-model="sessionName" />
-					</div>
+					<label for="field_profile_name" class="control-label">Profile Name</label>
+					<input type="text" id="field_profile_name" name="author" class="form-control" placeholder="Profile Name" ng-model="currentProfile.name" />
 				</div>
 				<div class="form-group">
-					<label for="field_author" class="col-md-3 col-sm-2 col-xs-12 control-label">Author</label>
-					<div class="col-md-9 col-sm-10 col-xs-12">
-						<input type="text" id="field_author" name="author" class="form-control" placeholder="Author" ng-model="authorName" />
-					</div>
+					<label for="field_session_name" class="control-label">Session Name</label>
+					<input type="text" id="field_session_name" name="session_name" class="form-control" placeholder="Default Session" ng-model="currentProfile.sessionName" />
 				</div>
 				<div class="form-group">
-					<label for="field_author_url" class="col-md-3 col-sm-2 col-xs-12 control-label">URL</label>
-					<div class="col-md-9 col-sm-10 col-xs-12">
-						<input type="text" id="field_author_url" name="author_url" class="form-control" placeholder="URL" ng-model="authorUrl" />
-					</div>
+					<label for="field_author" class="control-label">Author</label>
+					<input type="text" id="field_author" name="author" class="form-control" placeholder="Author" ng-model="currentProfile.author" />
 				</div>
-			</div>
+				<div class="form-group">
+					<label for="field_author_url" class="control-label">URL</label>
+					<input type="text" id="field_author_url" name="author_url" class="form-control" placeholder="URL" ng-model="currentProfile.url" />
+				</div>
+			</form>
 			<div class="well">
 				<div class="form-group">
 					<label class="control-label">Color Type</label>
@@ -91,11 +124,6 @@
 						<div color-value="blue" ng-model="currentColor.color" color-component-spinner="blue" read-only field-id="field_blue_component" class="col-sm-4 col-xs-12"></div>
 					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<button type="button" class="btn btn-primary" ng-click="saveProfile()"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
-				<button type="button" class="btn btn-default" ng-click="exportProfile()"><i class="fa fa-share" aria-hidden="true"></i>&nbsp;Export</button>
-				<button type="button" class="btn btn-default" ng-click="shareProfile()"><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share</button>
 			</div>
 		</div>
 	</div>

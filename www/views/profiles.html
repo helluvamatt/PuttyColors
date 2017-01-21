@@ -1,44 +1,29 @@
 ﻿<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 col-xs-12">
-			<h3>Stock Profiles</h3>
-			<ul class="list-group" ng-show="presets.length">
-				<li class="list-group-item" ng-repeat="preset in presets track by $index">
-					<div class="btn-group pull-right" role="group" aria-label="Profile item actions">
-						<button type="button" class="btn btn-default" ng-click="loadPreset($index)" uib-tooltip="Edit this profile" tooltip-append-to-body="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="sr-only">Edit profile</span></button>
-						<button type="button" class="btn btn-default" ng-click="exportPreset($index)" uib-tooltip="Export this profile" tooltip-append-to-body="true"><i class="fa fa-share" aria-hidden="true"></i><span class="sr-only">Export</span></button>
-					</div>
-					<h4 class="list-group-item-heading">
-						<span>{{preset.name}}</span>
-						<span ng-show="preset.author">({{preset.author}})</span>
-					</h4>
-					<div class="profileBar">
-						<div ng-repeat="propName in profileDataKeys track by $index" class="item" ng-style="{backgroundColor: preset.data[propName]}" uib-tooltip="{{profileColorNames[$index]}}" tooltip-append-to-body="true"></div>
-					</div>
-				</li>
-			</ul>
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-success" ng-click="newProfile()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;New Profile</button>
 				<button type="button" class="btn btn-default" ng-click="importProfile()"><i class="fa fa-file-code-o" aria-hidden="true"></i>&nbsp;Import Profile</button>
 			</div>
-			<h3>My Profiles</h3>
-			<ul class="list-group" ng-show="customProfiles.length">
-				<li class="list-group-item" ng-repeat="preset in customProfiles track by $index">
+			<h3>{{headerText}}</h3>
+			<ul class="list-group" ng-show="profiles.length">
+				<li class="list-group-item" ng-repeat="profile in profiles track by $index">
 					<div class="btn-group pull-right" role="group" aria-label="Profile item actions">
-						<button type="button" class="btn btn-default" ng-click="loadCustomProfile($index)" uib-tooltip="Edit this profile" tooltip-append-to-body="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="sr-only">Edit profile</span></button>
-						<button type="button" class="btn btn-default" ng-click="exportCustomProfile($index)" uib-tooltip="Export this profile" tooltip-append-to-body="true"><i class="fa fa-share" aria-hidden="true"></i><span class="sr-only">Export</span></button>
-						<button type="button" class="btn btn-danger" ng-click="deleteCustomProfile($index)" uib-tooltip="Delete this profile" tooltip-append-to-body="true"><i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete profile</span></button>
+						<button type="button" class="btn btn-default" ng-click="loadProfile($index)" uib-tooltip="Edit this profile" tooltip-append-to-body="true"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="sr-only">Edit profile</span></button>
+						<button type="button" class="btn btn-default" ng-click="exportProfile($index)" uib-tooltip="Export this profile" tooltip-append-to-body="true"><i class="fa fa-share" aria-hidden="true"></i><span class="sr-only">Export</span></button>
+						<button type="button" class="btn btn-danger" ng-click="deleteProfile($index)" ng-show="canDelete" uib-tooltip="Delete this profile" tooltip-append-to-body="true"><i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete profile</span></button>
 					</div>
 					<h4 class="list-group-item-heading">
-						<span>{{preset.name}}</span>
-						<span ng-show="preset.author">({{preset.author}})</span>
+						<span>{{profile.name}}</span>
+						<span ng-show="profile.author">({{profile.author}})</span>
 					</h4>
 					<div class="profileBar">
-						<div ng-repeat="propName in profileDataKeys track by $index" class="item" ng-style="{backgroundColor: preset.data[propName]}" uib-tooltip="{{profileColorNames[$index]}}" tooltip-append-to-body="true"></div>
+						<div ng-repeat="propName in profileDataKeys track by $index" class="item" ng-style="{backgroundColor: profile.data[propName]}" uib-tooltip="{{profileColorNames[$index]}}" tooltip-append-to-body="true"></div>
 					</div>
 				</li>
 			</ul>
-			<div class="alert alert-warning alert-b" ng-hide="customProfiles.length">You don't have any custom profiles saved.</div>
+			<ul uib-pagination total-items="profilesCount" ng-model="page" items-per-page="pageSize" max-size="5" class="pagination-sm" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+			<div class="alert alert-warning alert-block" ng-hide="profiles.length">{{emptyText}}</div>
 		</div>
 	</div>
 </div>

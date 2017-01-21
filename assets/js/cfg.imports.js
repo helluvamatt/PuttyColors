@@ -4,6 +4,7 @@
 	var registryImportRegex = /^([ -~]+?)\s*\=\s*\"(\d{1,3})\,(\d{1,3})\,(\d{1,3})\"$/gm;
 
 	importService.register('json', "JSON", function (data) {
+		// TODO Validate against schema
 		return angular.extend(new Profile(), angular.fromJson(data));
 	});
 

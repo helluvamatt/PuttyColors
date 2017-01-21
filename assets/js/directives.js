@@ -33,15 +33,14 @@
 	};
 }])
 
-.directive('previewStyle', ['profileService', 'exportService', function (profileService, exportService) {
-
+.directive('previewStyle', ['exportService', function (exportService) {
 	return {
 		restrict: 'A',
 		link: function (scope, element) {
-			scope.$watch(function () { return profileService.currentProfile; }, function () {
-				var code = exportService.render('views/exports/preview_style.css', profileService.currentProfile);
+			scope.$on('profileChanged', function(event, profile) {
+				var code = exportService.render('views/exports/preview_style.css', profile);
 				element.html(code);
-			}, true);
+			});
 		}
 	}
 }]);

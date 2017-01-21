@@ -1,6 +1,6 @@
 [
 	{
-		"type": "PRESET",
+		"type": 0,
 		"name": "Default",
 		"author": "Simon Tatham",
 		"url": "http://www.chiark.greenend.org.uk/~sgtatham/putty/",
@@ -29,7 +29,7 @@
 			"colour21": "rgb(255,255,255)"
 		}
 	}, {
-		"type": "PRESET",
+		"type": 0,
 		"name": "Solarized Dark",
 		"author": "Ethan Schoonover",
 		"url": "https://github.com/altercation/solarized/tree/master/putty-colors-solarized",
@@ -58,7 +58,7 @@
 			"colour21": "rgb(253,246,227)"
 		}
 	}, {
-		"type": "PRESET",
+		"type": 0,
 		"name": "Solarized Light",
 		"author": "Ethan Schoonover",
 		"url": "https://github.com/altercation/solarized/tree/master/putty-colors-solarized",

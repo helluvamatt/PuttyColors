@@ -28,7 +28,8 @@
     "jquery": "^3.1.1",
     "jquery-minicolors": "^2.2.4",
     "tinycolor": "^1.4.1",
-    "tv4": "^1.2.7"
+    "tv4": "^1.2.7",
+    "ngclipboard": "^1.1.1"
   },
   "resolutions": {
     "angular": "^1.6.1",

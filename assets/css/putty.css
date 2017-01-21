@@ -69,7 +69,8 @@ body {
 	text-align: center;
 }
 
-.modal-body > .alert:last-child
+.modal-body > .alert:last-child,
+.modal-body > form > *:last-child
 {
 	margin-bottom: 0;
 }

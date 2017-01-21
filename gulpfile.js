@@ -21,6 +21,7 @@ var images = [
 var scripts = [
     'bower_components/tinycolor/tinycolor.js',
     'bower_components/tv4/tv4.js',
+    'bower_components/clipboard/dist/clipboard.js',
     'bower_components/jquery/dist/jquery.js',
     'bower_components/jquery-minicolors/jquery.minicolors.js',
     'bower_components/angular/angular.js',
@@ -29,7 +30,8 @@ var scripts = [
     'bower_components/angular-json-validator/angular-json-validator.js',
     'bower_components/angular-minicolors/angular-minicolors.js',
     'bower_components/angular-ui-router/release/angular-ui-router.js',
-    'assets/js/*.js'
+    'bower_components/ngclipboard/dist/ngclipboard.js',
+    'assets/js/**/*.js'
 ];
 
 var stylesheets = [

@@ -8,8 +8,7 @@
 /www/assets
 /typings
 /vendor
-/app/logs/*.log
-/app/config.json
+/app/logs
 .settings/
 .buildpath
 .project
